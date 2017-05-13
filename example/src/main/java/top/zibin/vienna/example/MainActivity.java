@@ -1,4 +1,4 @@
-package top.zibin.vienna;
+package top.zibin.vienna.example;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
