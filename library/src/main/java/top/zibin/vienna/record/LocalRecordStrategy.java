@@ -3,6 +3,7 @@ package top.zibin.vienna.record;
 import android.media.MediaRecorder;
 
 import java.io.File;
+import java.io.IOException;
 
 public class LocalRecordStrategy implements BaseRecordStrategy {
   private static final int RECORDING_BITRATE = 32000;
@@ -15,27 +16,55 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
   private long mStartTime;
 
   @Override public void startRecord() {
-    mRecorder.release();
-    mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
-    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-    mRecorder.setAudioChannels(1);
+    try {
+      mRecorder.release();
+      mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+      mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
+      mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+      mRecorder.setAudioChannels(1);
+      mRecorder.setAudioSamplingRate(RECORDING_SAMPLING);
+      mRecorder.setAudioEncodingBitRate(RECORDING_BITRATE);
+
+      mRecorder.setOutputFile(mRecordFile.getAbsolutePath());
+      mRecorder.prepare();
+      isRecording = true;
+      mRecorder.start();
+      mStartTime = System.currentTimeMillis();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override public void stopRecord() {
+    if (mRecorder == null) throw new IllegalStateException("Most init media recorder first!");
 
+    mRecorder.stop();
+    mRecorder.release();
+    isRecording = false;
+    if (mRecordFile != null && mRecordFile.exists() &&
+        System.currentTimeMillis() - mStartTime < 899 &&
+        mRecordFile.delete()) {
+      isRecording = false;
+    }
   }
 
   @Override public void discardRecord() {
+    if (mRecorder == null) throw new IllegalStateException("Most init the media recorder first!");
 
+    mRecorder.stop();
+    mRecorder.release();
+    if (mRecordFile != null && mRecordFile.exists() &&
+        mRecordFile.delete()) {
+      isRecording = false;
+    }
   }
 
   @Override public String getOutputFile() {
-    return null;
+    return mRecordFile.getAbsolutePath();
   }
 
   @Override public void setOutputFile(File recordFile) {
-
+    this.mRecordFile = recordFile;
   }
 
   @Override public String getRecordFileName() {
@@ -43,10 +72,11 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
   }
 
   @Override public boolean isRecording() {
-    return false;
+    return isRecording;
   }
 
   @Override public int getMaxAmplitude() {
-    return 0;
+    if (mRecorder == null) return 0;
+    return mRecorder.getMaxAmplitude();
   }
 }

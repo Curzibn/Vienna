@@ -18,4 +18,6 @@ public interface BaseRecordStrategy {
   boolean isRecording();
 
   int getMaxAmplitude();
+
+  void setOnRecordReleaseListener(RecordReleaseListener listener);
 }
