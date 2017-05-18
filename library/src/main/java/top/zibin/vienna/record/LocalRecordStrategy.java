@@ -17,7 +17,11 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
 
   @Override public void startRecord() {
     try {
-      mRecorder.release();
+      if (mRecorder != null) {
+        mRecorder.release();
+        mRecorder = null;
+      }
+      mRecorder = new MediaRecorder();
       mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
       mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
       mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
@@ -59,8 +63,8 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
     }
   }
 
-  @Override public String getOutputFile() {
-    return mRecordFile.getAbsolutePath();
+  @Override public File getOutputFile() {
+    return mRecordFile;
   }
 
   @Override public void setOutputFile(File recordFile) {
@@ -68,7 +72,7 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
   }
 
   @Override public String getRecordFileName() {
-    return null;
+    return "Vienna_" + System.currentTimeMillis() + ".aac";
   }
 
   @Override public boolean isRecording() {

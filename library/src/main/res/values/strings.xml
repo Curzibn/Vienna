@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">Vienna</string>
+  <string name="begin">开始</string>
+  <string name="stop">停止</string>
 </resources>

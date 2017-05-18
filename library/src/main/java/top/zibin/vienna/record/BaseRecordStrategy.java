@@ -9,7 +9,7 @@ public interface BaseRecordStrategy {
 
   void discardRecord();
 
-  String getOutputFile();
+  File getOutputFile();
 
   void setOutputFile(File recordFile);
 
@@ -18,6 +18,4 @@ public interface BaseRecordStrategy {
   boolean isRecording();
 
   int getMaxAmplitude();
-
-  void setOnRecordReleaseListener(RecordReleaseListener listener);
 }

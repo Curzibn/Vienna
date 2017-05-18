@@ -26,6 +26,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="8dp"
+      android:text="@string/begin"
       tools:text="Begin"/>
 
     <ProgressBar
@@ -33,13 +34,15 @@
       style="?android:attr/progressBarStyleSmall"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="8dp"/>
+      android:layout_margin="8dp"
+      android:visibility="gone"/>
 
     <TextView
       android:id="@+id/time"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="8dp"
+      android:visibility="gone"
       tools:text="10s"/>
   </LinearLayout>
 </top.zibin.vienna.example.AudioListView>

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import top.zibin.vienna.Vienna;
 
 public class AudioListView extends RelativeLayout {
   private RecyclerView recyclerView;
@@ -44,5 +47,13 @@ public class AudioListView extends RelativeLayout {
     mAdapter = new AudioAdapter(mAudios);
     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     recyclerView.setAdapter(mAdapter);
+
+    control.setOnClickListener(new OnClickListener() {
+      @Override public void onClick(View v) {
+        Vienna.INSTANCE.setSectionTime(5);
+        Vienna.INSTANCE.startRecord(getContext());
+        progressBar.setVisibility(VISIBLE);
+      }
+    });
   }
 }
