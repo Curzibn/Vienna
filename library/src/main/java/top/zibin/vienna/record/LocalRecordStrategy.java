@@ -13,7 +13,6 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
   private File mRecordFile;
 
   private boolean isRecording = false;
-  private long mStartTime;
 
   @Override public void startRecord() {
     try {
@@ -33,23 +32,21 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
       mRecorder.prepare();
       isRecording = true;
       mRecorder.start();
-      mStartTime = System.currentTimeMillis();
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
+  /**
+   * stop record audio and release media resource
+   */
   @Override public void stopRecord() {
     if (mRecorder == null) throw new IllegalStateException("Most init media recorder first!");
 
     mRecorder.stop();
     mRecorder.release();
+    mRecorder = null;
     isRecording = false;
-    if (mRecordFile != null && mRecordFile.exists() &&
-        System.currentTimeMillis() - mStartTime < 899 &&
-        mRecordFile.delete()) {
-      isRecording = false;
-    }
   }
 
   @Override public void discardRecord() {
@@ -76,7 +73,7 @@ public class LocalRecordStrategy implements BaseRecordStrategy {
   }
 
   @Override public boolean isRecording() {
-    return isRecording;
+    return mRecorder != null && isRecording;
   }
 
   @Override public int getMaxAmplitude() {

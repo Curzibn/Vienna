@@ -33,4 +33,8 @@ public class MainActivity extends AppCompatActivity {
           MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
     }
   }
+
+  @Override public void onBackPressed() {
+    android.os.Process.killProcess(android.os.Process.myPid());
+  }
 }

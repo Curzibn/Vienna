@@ -13,6 +13,12 @@
     android:layout_height="match_parent"
     android:layout_above="@+id/operate_item"/>
 
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_below="@+id/recycler_view"
+    android:background="@android:color/black"/>
+
   <LinearLayout
     android:id="@+id/operate_item"
     android:layout_width="match_parent"
@@ -38,11 +44,13 @@
       android:visibility="gone"/>
 
     <TextView
-      android:id="@+id/time"
+      android:id="@+id/volume"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="8dp"
-      android:visibility="gone"
-      tools:text="10s"/>
+      android:textColor="@android:color/black"
+      android:textSize="12sp"
+      android:visibility="visible"
+      tools:text="音量：5"/>
   </LinearLayout>
 </top.zibin.vienna.example.AudioListView>

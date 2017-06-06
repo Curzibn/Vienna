@@ -7,7 +7,7 @@
   android:orientation="vertical"
   android:padding="10dp">
 
-  <LinearLayout
+  <RelativeLayout
     android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_audio">
@@ -19,6 +19,5 @@
       android:layout_margin="4dp"
       android:contentDescription="@null"
       android:src="@drawable/ic_play_24dp"/>
-
-  </LinearLayout>
+  </RelativeLayout>
 </LinearLayout>

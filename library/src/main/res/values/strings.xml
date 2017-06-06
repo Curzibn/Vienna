@@ -2,4 +2,5 @@
   <string name="app_name">Vienna</string>
   <string name="begin">开始</string>
   <string name="stop">停止</string>
+  <string name="amplitude">音量: %1$d</string>
 </resources>
