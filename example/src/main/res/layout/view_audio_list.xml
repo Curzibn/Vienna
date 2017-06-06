@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<top.zibin.vienna.example.AudioListView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/audio_list_view"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/operate_item"/>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:layout_below="@+id/recycler_view"
+    android:background="@android:color/black"/>
+
+  <LinearLayout
+    android:id="@+id/operate_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/record_control"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:text="@string/begin"
+      tools:text="Begin"/>
+
+    <ProgressBar
+      android:id="@+id/progress_bar"
+      style="?android:attr/progressBarStyleSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:visibility="gone"/>
+
+    <TextView
+      android:id="@+id/volume"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="8dp"
+      android:textColor="@android:color/black"
+      android:textSize="12sp"
+      android:visibility="visible"
+      tools:text="音量：5"/>
+  </LinearLayout>
+</top.zibin.vienna.example.AudioListView>
